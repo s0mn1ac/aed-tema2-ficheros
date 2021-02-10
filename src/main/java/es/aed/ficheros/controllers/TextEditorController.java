@@ -10,75 +10,42 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class TextEditorController implements Initializable {
 
 	TextEditorModel textEditorModel = new TextEditorModel();
 
-//	@FXML
-//	private VBox textEditorVBox;
-//
-//	@FXML
-//	private Button textEditorSaveButton;
-//
-//	@FXML
-//	private Button textEditorLoadButton;
-//
-//	public TextEditorController() throws IOException {
-//
-//		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TextEditorView.fxml"));
-//		loader.setController(this);
-//		loader.load();
-//
-//	}
-//
-//	public VBox getView() {
-//		return textEditorVBox;
-//	}
-//	
-//	public void initialize(URL location, ResourceBundle resources) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	@FXML
+	private VBox textEditorVBox;
 	
 	@FXML
-	private GridPane grid;
+	private HBox textEditorHBox;
 	
 	@FXML
-	private Button button1;
+	private TextArea textEditorTextArea;
 
 	@FXML
-	private Button button2;
+	private Button textEditorSaveButton;
 
 	@FXML
-	private Button button3;
+	private Button textEditorLoadButton;
 
-	@FXML
-	private Button button4;
-	
-	@FXML
-	private Button button5;
-	
-	@FXML
-	private Button button6;
-	
 	public TextEditorController() throws IOException {
-
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TextEditorView.fxml"));
 		loader.setController(this);
 		loader.load();
-
 	}
 
-	public GridPane getView() {
-		return grid;
+	public VBox getView() {
+		return textEditorVBox;
 	}
-
+	
 	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
 		
-
 	}
 
 }
