@@ -12,12 +12,12 @@
       <TextArea fx:id="textEditorTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
       <HBox fx:id="textEditorHBox" maxWidth="1.7976931348623157E308">
          <children>
-            <Button fx:id="textEditorLoadButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Cargar" HBox.hgrow="ALWAYS">
+            <Button fx:id="textEditorLoadButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickLoadButton" text="Cargar" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="textEditorSaveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Guardar" HBox.hgrow="ALWAYS" />
+            <Button fx:id="textEditorSaveButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickSaveButton" text="Guardar" HBox.hgrow="ALWAYS" />
          </children>
          <VBox.margin>
             <Insets top="5.0" />
