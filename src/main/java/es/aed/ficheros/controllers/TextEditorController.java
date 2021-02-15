@@ -9,8 +9,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JFileChooser;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 public class TextEditorController implements Initializable {
@@ -29,7 +26,10 @@ public class TextEditorController implements Initializable {
 	private TextEditorModel textEditorModel = new TextEditorModel();
 	
 	private Path pathFile;
+	
 	private String fileName;
+	
+	private boolean newDocument;
 
 	@FXML
 	private VBox textEditorVBox;
@@ -69,8 +69,9 @@ public class TextEditorController implements Initializable {
 	
 	@FXML
 	private void onClickNewButton(ActionEvent e) {
-		
 		this.pathFile = null;
+		this.fileName = null;
+		this.newDocument = true;
 		
 		textEditorTextArea.clear();
 		textEditorTextArea.setDisable(false);
@@ -78,17 +79,19 @@ public class TextEditorController implements Initializable {
 		textEditorDeleteButton.setDisable(false);
 		textEditorSaveButton.setDisable(false);
 		textEditorTextField.setDisable(false);
-		
+		textEditorTextField.setText("NuevoDocumentoDeTexto.txt");
 	}
 	
 	@FXML
 	private void onClickDeleteButton(ActionEvent e) {
+		this.newDocument = false;
 		
 		textEditorTextArea.clear();
 		textEditorTextArea.setDisable(true);
 		textEditorDeleteButton.setDisable(true);
+		textEditorSaveButton.setDisable(true);
 		textEditorTextField.setDisable(true);
-
+		textEditorTextField.clear();
 	}
 	
 	@FXML
@@ -102,6 +105,8 @@ public class TextEditorController implements Initializable {
 		if (selectedFile != null) {
 			this.pathFile = selectedFile.toPath();
 			this.fileName = this.pathFile.getFileName().toString();
+			this.newDocument = false;
+
 			ArrayList<String> fileContent = (ArrayList<String>) textEditorModel.openFile(pathFile.toString());
 			textEditorTextArea.clear();
 			for (String line : fileContent) {
@@ -120,30 +125,33 @@ public class TextEditorController implements Initializable {
 	@FXML
 	private void onClickSaveButton(ActionEvent e) {
 		
-		String newPath = this.pathFile.toString();
+		String finalPath = "";
 		String fileContent = textEditorTextArea.getText();
-
-		if (!this.fileName.equals(textEditorTextField.getText())) {
-			DirectoryChooser fileChooser = new DirectoryChooser();
-			fileChooser.setTitle("Seleccionar directorio");
-			File selectedDirectory = fileChooser.showDialog(null);
-			if (selectedDirectory != null) {				
-				this.pathFile = selectedDirectory.toPath();
-				newPath = this.pathFile.toString() + "/" + textEditorTextField.getText();
-				System.out.println(newPath);
+		
+		if (this.newDocument) {
+			this.fileName = this.textEditorTextField.getText();
+			finalPath = this.textEditorModel.selectDirectory(this.fileName);
+		} else {
+			if (!this.fileName.equals(textEditorTextField.getText())) {
+				finalPath = this.textEditorModel.selectDirectory(this.fileName);
+			} else {
+				finalPath = this.pathFile.toString();
 			}
 		}
 		
-		
-		textEditorModel.saveFile(newPath, fileContent);
-		
-		textEditorTextArea.clear();
-		textEditorTextArea.setDisable(true);
-		textEditorDeleteButton.setDisable(true);
-		textEditorSaveButton.setDisable(true);
-		textEditorTextField.clear();
-		this.fileName = null;
-		this.pathFile = null;
+		if (finalPath != null) {
+			textEditorModel.saveFile(finalPath, fileContent);
+			
+			textEditorTextArea.clear();
+			textEditorTextArea.setDisable(true);
+			textEditorDeleteButton.setDisable(true);
+			textEditorSaveButton.setDisable(true);
+			textEditorTextField.clear();
+			textEditorTextField.setDisable(true);
+			this.fileName = null;
+			this.pathFile = null;
+			this.newDocument = false;
+		}
 		
 	}
 

@@ -5,11 +5,12 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.stage.DirectoryChooser;
 
 public class TextEditorModel {
 	
@@ -50,6 +51,18 @@ public class TextEditorModel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String selectDirectory(String fileName) {
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		directoryChooser.setTitle("Seleccionar directorio");
+		File selectedDirectory = directoryChooser.showDialog(null);
+		if (selectedDirectory != null) {				
+			Path directoryPath = selectedDirectory.toPath();
+			return directoryPath.toString() + "/" + fileName;
+		} else {
+			return null;
+		}
 	}
 
 }
