@@ -1,5 +1,6 @@
 package es.aed.ficheros.models;
 
+import es.aed.ficheros.enums.Genre;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -9,15 +10,23 @@ public class IMCCalculatorModel {
 		
 	}
 	
-	public void calculateIMC(Integer age, Float size, Float weight) {
+	public void calculateIMC(Person person) {
 		
-		System.out.println(weight);
-		System.out.println(size);
+		System.out.println(person.getWeight());
+		System.out.println(person.getSize());
 
-		Float result = (float) weight / (size * size);
+		Float result = (float) person.getWeight() / (person.getSize() * person.getSize());
 		
 		this.displayInfoWindow(result);
 		
+	}
+	
+	public String convertGenreToString(Genre genre) {
+		return genre.equals(Genre.M) ? "Masculino" : "Femenino";
+	}
+	
+	public Genre convertGenreFromString(String genre) {
+		return genre.equals("Masculino") ? Genre.M : Genre.F;
 	}
 	
 	private void displayInfoWindow(Float result) {
