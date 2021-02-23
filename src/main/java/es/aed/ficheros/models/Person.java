@@ -13,7 +13,7 @@ public class Person {
 	
 	public Person() { }
 	
-	public Person(String firstname, String lastname, Integer age, Float size, Float weight, Genre genre) {
+	public Person(String firstname, String lastname, Genre genre, Integer age, Float size, Float weight) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.age = age;

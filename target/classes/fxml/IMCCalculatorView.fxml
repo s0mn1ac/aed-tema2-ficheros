@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="imcCalculatorVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="imcCalculatorVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="65.0">
          <children>
@@ -104,21 +108,65 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="65.0">
+      <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="45.0">
          <children>
-            <VBox alignment="CENTER" prefWidth="300.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <children>
-                  <Button fx:id="imcCalculatorCalculateButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickCalculateButton" style="-fx-background-color: #56CBF9;" text="Calcular" textFill="WHITE" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
+            <Button fx:id="imcCalculatorCalculateButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickCalculateButton" prefWidth="180.0" style="-fx-background-color: #56CBF9;" text="Calcular" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="imcCalculatorSaveButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickSaveButton" prefWidth="45.0" style="-fx-background-color: green;" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                  	<image>
+                    	<Image url="/imgs/baseline_save_white_18dp.png" />
+                    </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="imcCalculatorLoadButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickLoadButton" prefWidth="45.0" style="-fx-background-color: orange;" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <graphic>
+                  <ImageView pickOnBounds="true" preserveRatio="true">
+                  	<image>
+                        <Image url="/imgs/baseline_save_white_18dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
          </children>
+      </HBox>
+      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+         <children>
+            <ListView fx:id="imcCalculatorListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ListView>
+         </children>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
       </HBox>
    </children>
    <padding>
