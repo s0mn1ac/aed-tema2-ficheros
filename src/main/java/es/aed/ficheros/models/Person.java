@@ -4,22 +4,34 @@ import es.aed.ficheros.enums.Genre;
 
 public class Person {
 	
+	private String dni;
 	private String firstname;
 	private String lastname;
+	private Genre genre;
 	private Integer age;
 	private Float size;
 	private Float weight;
-	private Genre genre;
+	private Float imc;
 	
 	public Person() { }
 	
-	public Person(String firstname, String lastname, Genre genre, Integer age, Float size, Float weight) {
+	public Person(String dni, String firstname, String lastname, Genre genre, Integer age, Float size, Float weight, Float imc) {
+		this.dni = dni;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.genre = genre;
 		this.age = age;
 		this.size = size;
 		this.weight = weight;
-		this.genre = genre;
+		this.imc = imc;
+	}
+	
+	public String getDni() {
+		return this.dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 	
 	public String getFirstname() {
@@ -36,6 +48,14 @@ public class Person {
 	
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	
+	public Genre getGenre() {
+		return this.genre;
+	}
+	
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 	
 	public Integer getAge() {
@@ -61,13 +81,13 @@ public class Person {
 	public void setWeight(Float weight) {
 		this.weight = weight;
 	}
-	
-	public Genre getGenre() {
-		return this.genre;
+
+	public Float getImc() {
+		return this.imc;
 	}
 	
-	public void setGenre(Genre genre) {
-		this.genre = genre;
+	public void setImc(Float imc) {
+		this.imc = imc;
 	}
 	
 }
