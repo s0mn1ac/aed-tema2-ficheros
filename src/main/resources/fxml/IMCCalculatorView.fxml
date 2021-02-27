@@ -161,7 +161,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                   	<image>
-                        <Image url="/imgs/baseline_save_white_18dp.png" />
+                        <Image url="/imgs/baseline_note_add_white_18dp.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -179,7 +179,7 @@
                <graphic>
                   <ImageView pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="/imgs/baseline_save_white_18dp.png" />
+                        <Image url="/imgs/baseline_delete_white_18dp.png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -1,6 +1,7 @@
 package es.aed.ficheros;
 
 import es.aed.ficheros.controllers.IMCCalculatorController;
+import es.aed.ficheros.controllers.LibraryController;
 import es.aed.ficheros.controllers.TextEditorController;
 
 import javafx.application.Application;
@@ -16,6 +17,7 @@ public class Ficheros extends Application {
 		
 		TextEditorController textEditorController = new TextEditorController();
 		IMCCalculatorController imcCalculatorController = new IMCCalculatorController();
+		LibraryController libraryController = new LibraryController();
 		
 		// Construcción del TabPane
 		TabPane tabPane = new TabPane();
@@ -23,6 +25,7 @@ public class Ficheros extends Application {
 		// Creación de Tabs
 		tabPane.getTabs().add(new Tab("Editor de texto", textEditorController.getView()));
 		tabPane.getTabs().add(new Tab("Calculadora I.M.C.", imcCalculatorController.getView()));
+		tabPane.getTabs().add(new Tab("Librería", libraryController.getView()));
 		
 		// Construcción de escena
 		Scene scene = new Scene(tabPane, 640, 640);

@@ -1,4 +1,4 @@
-package es.aed.ficheros.models;
+package es.aed.ficheros.dtos;
 
 import es.aed.ficheros.enums.Genre;
 

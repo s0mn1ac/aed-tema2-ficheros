@@ -1,22 +1,20 @@
 package es.aed.ficheros.controllers;
 
+import es.aed.ficheros.dtos.Person;
 import es.aed.ficheros.enums.Genre;
+import es.aed.ficheros.exceptions.Alerts;
 import es.aed.ficheros.exceptions.Messages;
 import es.aed.ficheros.models.IMCCalculatorModel;
-import es.aed.ficheros.models.Person;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -32,6 +30,8 @@ public class IMCCalculatorController implements Initializable {
 	private IMCCalculatorModel imcCalculatorModel = new IMCCalculatorModel();
 	
 	private ToggleGroup genreToggleGroup = new ToggleGroup();
+	
+	private Alerts alert = new Alerts();
 	
 	@FXML
 	private VBox imcCalculatorVBox;
@@ -115,10 +115,10 @@ public class IMCCalculatorController implements Initializable {
 			Float weight = Float.parseFloat(this.imcCalculatorWeightTextField.getText());
 			
 			Float imc = this.imcCalculatorModel.calculate(dni, firstname, lastname, genre, age, size, weight);
-			this.displayAlert(Messages.TITLE_RESULT, Messages.MESSAGE_IMC_RESULT + imc.toString(), AlertType.INFORMATION);
+			this.alert.displayAlert(Messages.TITLE_RESULT, Messages.MESSAGE_IMC_RESULT + imc.toString(), AlertType.INFORMATION);
 
 		} catch (Exception error) {
-			this.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_NO_NUMERIC_VALUE, AlertType.ERROR);
+			this.alert.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_NO_NUMERIC_VALUE, AlertType.ERROR);
 		}
 
 	}
@@ -142,7 +142,7 @@ public class IMCCalculatorController implements Initializable {
 			this.clearAll();
 			
 		} catch (Exception error) {
-			this.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_NO_NUMERIC_VALUE, AlertType.ERROR);
+			this.alert.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_NO_NUMERIC_VALUE, AlertType.ERROR);
 		}
 		
 	}
@@ -233,19 +233,9 @@ public class IMCCalculatorController implements Initializable {
 		this.imc.prefWidthProperty().bind(this.imcCalculatorTableView.widthProperty().multiply(0.09));
 	}
 	
-	private void displayAlert(String title, String message, AlertType alertType) {
-		Alert alert = new Alert(alertType);
-		alert.setTitle(title);
-		alert.setHeaderText(null);
-		alert.setContentText(message);
-		alert.showAndWait();
-	}
-	
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		this.initButtonBindings();
 		this.initTableColumns();
-		
 		this.imcCalculatorMRadioButton.setToggleGroup(genreToggleGroup);
 		this.imcCalculatorFRadioButton.setToggleGroup(genreToggleGroup);
 		this.imcCalculatorMRadioButton.setSelected(true);

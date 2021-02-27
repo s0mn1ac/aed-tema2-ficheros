@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<library>
+    <author>
+        <firstname>JK</firstname>
+        <lastname>Rowling</lastname>
+        <books>
+            <book>
+                <title>Harry Potter y La Piedra Filosofal</title>
+                <pages>500</pages>
+            </book>
+            <book>
+                <title>Harry Potter y La Cámara Secreta</title>
+                <pages>300</pages>
+            </book>
+            <book>
+                <title>Harry Potter y El Prisionero de Azkaban</title>
+                <pages>400</pages>
+            </book>
+        </books>
+    </author>
+    <author>
+        <firstname>JRR</firstname>
+        <lastname>Tolkien</lastname>
+        <books>
+            <book>
+                <title>El Señor de Los Anillos: La comunidad del Anillo</title>
+                <pages>800</pages>
+            </book>
+            <book>
+                <title>El Señor de Los Anillos: Las Dos Torres</title>
+                <pages>800</pages>
+            </book>
+            <book>
+                <title>El Señor de Los Anillos: El Retorno del Rey</title>
+                <pages>800</pages>
+            </book>
+        </books>
+    </author>
+    <author>
+        <firstname>Suzanne</firstname>
+        <lastname>Collins</lastname>
+        <books>
+            <book>
+                <title>Los juegos del hambre</title>
+                <pages>374</pages>
+            </book>
+        </books>
+    </author>
+    <author>
+        <firstname>Brandon</firstname>
+        <lastname>Sanderson</lastname>
+        <books>
+            <book>
+                <title>El camnio de los Reyes</title>
+                <pages>1007</pages>
+            </book>
+        </books>
+    </author>
+</library>

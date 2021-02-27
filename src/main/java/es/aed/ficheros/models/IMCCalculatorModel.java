@@ -6,20 +6,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import es.aed.ficheros.dtos.Person;
 import es.aed.ficheros.enums.Genre;
+import es.aed.ficheros.exceptions.Alerts;
+import es.aed.ficheros.exceptions.Messages;
+import javafx.scene.control.Alert.AlertType;
 
 public class IMCCalculatorModel {
 	
-	public IMCCalculatorModel() {
-		
-	}
+	public IMCCalculatorModel() { }
+	
+	private Alerts alert = new Alerts();
 	
 	// CALCULATE
+	// Calcula y devuelve el IMC en formato Float
 	public Float calculate(String dni, String firstname, String lastname, String genre, Integer age, Float size, Float weight) {
 		return this.calculateImc(weight, size);
 	}
 	
 	// SAVE
+	// Guarda una persona en una base de datos en formato csv
 	public void save(String dni, String firstname, String lastname, String genre, Integer age, Float size, Float weight) {
 		
 		String comma = ",";
@@ -59,12 +65,13 @@ public class IMCCalculatorModel {
 			csvWriter.close();
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			this.alert.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_SAVE_PERSON, AlertType.ERROR);
 		}
 		
 	}
 	
 	// LOAD
+	// Carga una persona desde una base de datos en formato csv
 	public ArrayList<Person> load() {
 		ArrayList<Person> people = new ArrayList<Person>();
 		
@@ -73,17 +80,19 @@ public class IMCCalculatorModel {
 		try {
 			
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile));
-			String[] line = bufferedReader.readLine().split(",");
+			String line = bufferedReader.readLine();
 			while (line != null) {
-				Person person = new Person(line[0], line[1], line[2], Genre.valueOf(line[3]), Integer.parseInt(line[4]), Float.parseFloat(line[5]), Float.parseFloat(line[6]), Float.parseFloat(line[7]));
+				String[] parsedLine = line.split(",");
+				Person person = new Person(parsedLine[0], parsedLine[1], parsedLine[2], Genre.valueOf(parsedLine[3]), Integer.parseInt(parsedLine[4]), Float.parseFloat(parsedLine[5]), Float.parseFloat(parsedLine[6]), Float.parseFloat(parsedLine[7]));
 				people.add(person);
-				line = bufferedReader.readLine().split(",");
+				line = bufferedReader.readLine();
 			}
 
 			bufferedReader.close();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			this.alert.displayAlert(Messages.TITLE_ERROR, Messages.ERROR_LOAD_PERSON, AlertType.ERROR);
 		}
 		
 		return people;
