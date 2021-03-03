@@ -10,7 +10,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
-public class Ficheros extends Application {
+public class FicherosApp extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

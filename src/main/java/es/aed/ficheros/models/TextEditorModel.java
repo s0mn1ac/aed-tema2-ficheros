@@ -1,13 +1,29 @@
 package es.aed.ficheros.models;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.nio.file.WatchEvent.Kind;
+import java.nio.file.WatchEvent.Modifier;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.stage.DirectoryChooser;
@@ -18,17 +34,22 @@ public class TextEditorModel {
 		
 	}
 	
-	public ArrayList<String> openFile(String path) {
+	public String openFile(String path) {
 		
-		File file  = new File(path);
-		ArrayList<String> fileContent = new ArrayList<String>();
+		String currentLine;
+		String fileContent = "";
 		
-		try (Scanner sc = new Scanner(file)) {
-			while (sc.hasNextLine()) {
-				fileContent.add(sc.nextLine() + "\n");
+		try {
+			File file  = new File(path);
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			while ((currentLine = bufferedReader.readLine()) != null) {
+				fileContent += currentLine;
 			}
+			bufferedReader.close();
 		} catch (FileNotFoundException x) {
 			x.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return fileContent;
@@ -37,17 +58,12 @@ public class TextEditorModel {
 	
 	public void saveFile(String path, String fileContent) {
 		
-		File file  = new File(path);
-		
 		try {
-			
-			FileOutputStream fileOutputStream = new FileOutputStream(file);
-		    DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(fileOutputStream));
-		    dataOutputStream.writeUTF(fileContent);
-		    dataOutputStream.close();
-			
+			File file  = new File(path);
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+			bufferedWriter.write(fileContent);
+			bufferedWriter.close();			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

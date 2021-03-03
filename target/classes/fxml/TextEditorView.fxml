@@ -1,109 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.HTMLEditor?>
 
-<VBox fx:id="textEditorVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextArea fx:id="textEditorTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextArea>
-      <HBox fx:id="textEditorHBox" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
          <children>
-            <Text fx:id="textEditorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de archivo" textOrigin="BOTTOM" HBox.hgrow="SOMETIMES">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Text>
-            <TextField fx:id="textEditorTextField" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
-            	<HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </TextField>
-            <Button fx:id="textEditorNewButton" mnemonicParsing="false" onAction="#onClickNewButton" style="-fx-background-color: green;">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fx:id="textEditorNewImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/imgs/baseline_note_add_white_18dp.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="textEditorDeleteButton" mnemonicParsing="false" onAction="#onClickDeleteButton" style="-fx-background-color: red;">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fx:id="textEditorDeleteImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/imgs/baseline_delete_white_18dp.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="textEditorLoadButton" mnemonicParsing="false" onAction="#onClickLoadButton" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-               <graphic>
-                  <ImageView fx:id="textEditorLoadImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/imgs/baseline_restore_page_white_18dp.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="textEditorSaveButton" mnemonicParsing="false" onAction="#onClickSaveButton" style="-fx-background-color: grey;" HBox.hgrow="ALWAYS">
-               <graphic>
-                  <ImageView fx:id="textEditorSaveImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="/imgs/baseline_save_white_18dp.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
+            <HTMLEditor fx:id="editorHtmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" VBox.vgrow="NEVER">
          <VBox.margin>
-            <Insets top="5.0" />
+            <Insets />
          </VBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre del archivo:">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Text>
+            <TextField fx:id="fileNameTextField" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="newButton" mnemonicParsing="false" onAction="#onClickNewButton" style="-fx-background-color: DodgerBlue;" text="Nuevo" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#onClickClearButton" style="-fx-background-color: red;" text="Limpiar" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="loadButton" mnemonicParsing="false" onAction="#onClickLoadButton" style="-fx-background-color: orange;" text="Cargar" textFill="WHITE">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onClickSaveButton" style="-fx-background-color: green;" text="Guardar" textFill="WHITE" />
+         </children>
       </HBox>
    </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
 </VBox>

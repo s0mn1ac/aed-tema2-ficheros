@@ -1,10 +1,10 @@
 package es.aed.ficheros;
 
-public class App {
+public class Main {
 	
     public static void main(String[] args) {
 
-        Ficheros.main(args);
+        FicherosApp.main(args);
  
     }
     

@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.scene.web.HTMLEditor;
 
 public class TextEditorController implements Initializable {
 
@@ -32,40 +33,25 @@ public class TextEditorController implements Initializable {
 	private boolean newDocument;
 
 	@FXML
-	private VBox textEditorVBox;
+	private VBox view;
 	
 	@FXML
-	private HBox textEditorHBox;
+	private HTMLEditor editorHtmlEditor;
 	
 	@FXML
-	private TextArea textEditorTextArea;
+	private TextField fileNameTextField;
 	
 	@FXML
-	private TextField textEditorTextField;
+	private Button newButton;
 	
 	@FXML
-	private Button textEditorNewButton;
-	
-	@FXML
-	private ImageView textEditorNewImage;
-	
-	@FXML
-	private Button textEditorDeleteButton;
-	
-	@FXML
-	private ImageView textEditorDeleteImage;
+	private Button clearButton;
 
 	@FXML
-	private Button textEditorSaveButton;
-	
-	@FXML
-	private ImageView textEditorSaveImage;
+	private Button saveButton;
 
 	@FXML
-	private Button textEditorLoadButton;
-	
-	@FXML
-	private ImageView textEditorLoadImage;
+	private Button loadButton;
 	
 	@FXML
 	private void onClickNewButton(ActionEvent e) {
@@ -73,25 +59,25 @@ public class TextEditorController implements Initializable {
 		this.fileName = null;
 		this.newDocument = true;
 		
-		textEditorTextArea.clear();
-		textEditorTextArea.setDisable(false);
-		textEditorTextArea.requestFocus();
-		textEditorDeleteButton.setDisable(false);
-		textEditorSaveButton.setDisable(false);
-		textEditorTextField.setDisable(false);
-		textEditorTextField.setText("NuevoDocumentoDeTexto.txt");
+		editorHtmlEditor.setHtmlText("<html><head></head><body contenteditable=\"true\"></body></html>");;
+		editorHtmlEditor.setDisable(false);
+		editorHtmlEditor.requestFocus();
+		clearButton.setDisable(false);
+		saveButton.setDisable(false);
+		fileNameTextField.setDisable(false);
+		fileNameTextField.setText("index.html");
 	}
 	
 	@FXML
-	private void onClickDeleteButton(ActionEvent e) {
+	private void onClickClearButton(ActionEvent e) {
 		this.newDocument = false;
 		
-		textEditorTextArea.clear();
-		textEditorTextArea.setDisable(true);
-		textEditorDeleteButton.setDisable(true);
-		textEditorSaveButton.setDisable(true);
-		textEditorTextField.setDisable(true);
-		textEditorTextField.clear();
+		editorHtmlEditor.setHtmlText("<html><head></head><body contenteditable=\"true\"></body></html>");;
+		editorHtmlEditor.setDisable(true);
+		clearButton.setDisable(true);
+		saveButton.setDisable(true);
+		fileNameTextField.setDisable(true);
+		fileNameTextField.clear();
 	}
 	
 	@FXML
@@ -107,17 +93,16 @@ public class TextEditorController implements Initializable {
 			this.fileName = this.pathFile.getFileName().toString();
 			this.newDocument = false;
 
-			ArrayList<String> fileContent = (ArrayList<String>) textEditorModel.openFile(pathFile.toString());
-			textEditorTextArea.clear();
-			for (String line : fileContent) {
-				textEditorTextArea.appendText(line);
-			}
-			textEditorTextArea.setDisable(false);
-			textEditorTextArea.requestFocus();
-			textEditorDeleteButton.setDisable(false);
-			textEditorSaveButton.setDisable(false);
-			textEditorTextField.setText(this.fileName);
-			textEditorTextField.setDisable(false);
+			String fileContent = textEditorModel.openFile(pathFile.toString());
+			editorHtmlEditor.setHtmlText("<html><head></head><body contenteditable=\"true\"></body></html>");
+//			System.out.println(fileContent);
+			this.editorHtmlEditor.setHtmlText(fileContent);
+			editorHtmlEditor.setDisable(false);
+			editorHtmlEditor.requestFocus();
+			clearButton.setDisable(false);
+			saveButton.setDisable(false);
+			fileNameTextField.setText(this.fileName);
+			fileNameTextField.setDisable(false);
 		}
 		
 	}
@@ -126,13 +111,14 @@ public class TextEditorController implements Initializable {
 	private void onClickSaveButton(ActionEvent e) {
 		
 		String finalPath = "";
-		String fileContent = textEditorTextArea.getText();
+		String fileContent = editorHtmlEditor.getHtmlText();
+		System.out.println(fileContent);
 		
 		if (this.newDocument) {
-			this.fileName = this.textEditorTextField.getText();
+			this.fileName = this.fileNameTextField.getText();
 			finalPath = this.textEditorModel.selectDirectory(this.fileName);
 		} else {
-			if (!this.fileName.equals(textEditorTextField.getText())) {
+			if (!this.fileName.equals(fileNameTextField.getText())) {
 				finalPath = this.textEditorModel.selectDirectory(this.fileName);
 			} else {
 				finalPath = this.pathFile.toString();
@@ -142,12 +128,12 @@ public class TextEditorController implements Initializable {
 		if (finalPath != null) {
 			textEditorModel.saveFile(finalPath, fileContent);
 			
-			textEditorTextArea.clear();
-			textEditorTextArea.setDisable(true);
-			textEditorDeleteButton.setDisable(true);
-			textEditorSaveButton.setDisable(true);
-			textEditorTextField.clear();
-			textEditorTextField.setDisable(true);
+			editorHtmlEditor.setHtmlText("<html><head></head><body contenteditable=\"true\"></body></html>");;
+			editorHtmlEditor.setDisable(true);
+			clearButton.setDisable(true);
+			saveButton.setDisable(true);
+			fileNameTextField.clear();
+			fileNameTextField.setDisable(true);
 			this.fileName = null;
 			this.pathFile = null;
 			this.newDocument = false;
@@ -162,15 +148,15 @@ public class TextEditorController implements Initializable {
 	}
 
 	public VBox getView() {
-		return textEditorVBox;
+		return view;
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		textEditorTextArea.setWrapText(true);
-		textEditorTextArea.setDisable(true);
-		textEditorDeleteButton.setDisable(true);
-		textEditorSaveButton.setDisable(true);
-		textEditorTextField.setDisable(true);
+//		textEditorTextArea.setWrapText(true);
+		editorHtmlEditor.setDisable(true);
+		clearButton.setDisable(true);
+		saveButton.setDisable(true);
+		fileNameTextField.setDisable(true);
 	}
 
 }

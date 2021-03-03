@@ -100,7 +100,7 @@ public class IMCCalculatorController implements Initializable {
 	private TableColumn<Person, Float> imc;
 	
 	@FXML
-	private void onClickCalculateButton(ActionEvent e) {
+	 void onClickCalculateButton(ActionEvent e) {
 
 		RadioButton radioButtonValue = (RadioButton) this.genreToggleGroup.getSelectedToggle();
 		
