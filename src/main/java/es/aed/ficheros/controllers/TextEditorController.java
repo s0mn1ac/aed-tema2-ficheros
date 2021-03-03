@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -14,10 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.web.HTMLEditor;
@@ -95,7 +91,6 @@ public class TextEditorController implements Initializable {
 
 			String fileContent = textEditorModel.openFile(pathFile.toString());
 			editorHtmlEditor.setHtmlText("<html><head></head><body contenteditable=\"true\"></body></html>");
-//			System.out.println(fileContent);
 			this.editorHtmlEditor.setHtmlText(fileContent);
 			editorHtmlEditor.setDisable(false);
 			editorHtmlEditor.requestFocus();
@@ -112,7 +107,6 @@ public class TextEditorController implements Initializable {
 		
 		String finalPath = "";
 		String fileContent = editorHtmlEditor.getHtmlText();
-		System.out.println(fileContent);
 		
 		if (this.newDocument) {
 			this.fileName = this.fileNameTextField.getText();
@@ -152,7 +146,6 @@ public class TextEditorController implements Initializable {
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
-//		textEditorTextArea.setWrapText(true);
 		editorHtmlEditor.setDisable(true);
 		clearButton.setDisable(true);
 		saveButton.setDisable(true);
